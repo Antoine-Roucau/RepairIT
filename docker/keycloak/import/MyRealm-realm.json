@@ -21,12 +21,12 @@
   },
   "clients": [
     {
-      "clientId": "api",
+      "clientId": "efrei-api",
       "name": "RepairIT",
       "enabled": true,
       "protocol": "openid-connect",
       "publicClient": false,
-      "secret": "api-secret-dev",
+      "secret": "efrei-api-secret-dev",
       "directAccessGrantsEnabled": true,
       "standardFlowEnabled": true,
       "redirectUris": [
@@ -50,11 +50,11 @@
           }
         },
         {
-          "name": "audience-api",
+          "name": "audience-efrei-api",
           "protocol": "openid-connect",
           "protocolMapper": "oidc-audience-mapper",
           "config": {
-            "included.client.audience": "api",
+            "included.client.audience": "efrei-api",
             "access.token.claim": "true",
             "id.token.claim": "false"
           }
