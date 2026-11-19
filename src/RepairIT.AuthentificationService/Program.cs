@@ -17,5 +17,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGet("/", () => "RepairIT.AuthentificationService is running");
 
 app.Run();

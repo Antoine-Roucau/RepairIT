@@ -1,0 +1,20 @@
+# Image générique pour toutes les API : le projet à construire est passé en argument
+ARG PROJECT
+
+# Étape 1 : compilation avec le SDK
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+ARG PROJECT
+WORKDIR /src
+# Tout src/ est copié car les services référencent RepairIT.Shared
+COPY src/ src/
+RUN dotnet publish "src/${PROJECT}/${PROJECT}.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+# Étape 2 : exécution avec le runtime ASP.NET seul (image plus légère)
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
+ARG PROJECT
+WORKDIR /app
+COPY --from=build /app/publish .
+ENV APP_DLL=${PROJECT}.dll
+# Port d'écoute par défaut des images .NET : 8080
+EXPOSE 8080
+ENTRYPOINT ["sh", "-c", "exec dotnet $APP_DLL"]

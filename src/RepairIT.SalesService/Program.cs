@@ -17,5 +17,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGet("/", () => "RepairIT.SalesService is running");
 
 app.Run();
