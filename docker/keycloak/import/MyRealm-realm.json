@@ -1,0 +1,157 @@
+{
+  "realm": "MyRealm",
+  "enabled": true,
+  "roles": {
+    "realm": [
+      {
+        "name": "Gestionnaire",
+        "description": "cree ordinateurs, reparations, ventes et peux consulte les statistiques"
+      },
+      {
+        "name": "Administrateur",
+        "description": "Tout ce que fait un gestionnaire + catalogue, types de reparations, utilisateurs",
+        "composite": true,
+        "composites": {
+          "realm": [
+            "Gestionnaire"
+          ]
+        }
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "api",
+      "name": "RepairIT",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "api-secret-dev",
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true,
+      "redirectUris": [
+        "http://localhost:5000/*"
+      ],
+      "webOrigins": [
+        "http://localhost:5000"
+      ],
+      "protocolMappers": [
+        {
+          "name": "realm-roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "config": {
+            "claim.name": "roles",
+            "multivalued": "true",
+            "jsonType.label": "String",
+            "access.token.claim": "true",
+            "id.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "audience-api",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "config": {
+            "included.client.audience": "api",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "admin1",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Alice",
+      "lastName": "Admin",
+      "email": "admin1@email.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin1",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "Administrateur"
+      ]
+    },
+    {
+      "username": "gestionnaire1",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Gestionnaire1",
+      "lastName": "RepairIT",
+      "email": "gestionnaire1@email.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "gestionnaire1",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "Gestionnaire"
+      ]
+    },
+    {
+      "username": "gestionnaire2",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Gestionnaire2",
+      "lastName": "RepairIT",
+      "email": "gestionnaire2@email.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "gestionnaire2",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "Gestionnaire"
+      ]
+    },
+    {
+      "username": "gestionnaire3",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Gestionnaire3",
+      "lastName": "RepairIT",
+      "email": "gestionnaire3@email.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "gestionnaire3",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "Gestionnaire"
+      ]
+    },
+    {
+      "username": "gestionnaire4",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Gestionnaire4",
+      "lastName": "RepairIT",
+      "email": "gestionnaire4@email.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "gestionnaire4",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "Gestionnaire"
+      ]
+    }
+  ]
+}
