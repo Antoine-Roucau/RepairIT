@@ -1,22 +1,40 @@
+using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
+using RepairIT.CatalogService.DB;
+using RepairIT.CatalogService.Services;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("CatalogDb")
+    ?? throw new InvalidOperationException("ConnectionStrings:CatalogDb manquant dans appsettings.json");
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddDbContext<CatalogDbContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddScoped<IOrdinateurService, OrdinateurService>();
+
+
+// echange des enums en string dans les json
+builder.Services.AddControllers()
+    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Cree et init BD si besoin
+await using (var scope = app.Services.CreateAsyncScope())
 {
-    app.MapOpenApi();
+    var context = scope.ServiceProvider.GetRequiredService<CatalogDbContext>();
+    await CatalogDbInitializer.InitialiserAsync(context, app.Logger);
 }
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Verif
 app.MapGet("/", () => "RepairIT.CatalogService is running");
 
-app.Run();
+app.UseSwagger();
+app.UseSwaggerUI();
+
+await app.RunAsync();

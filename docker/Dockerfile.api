@@ -1,7 +1,6 @@
-# Image générique pour toutes les API : le projet à construire est passé en argument
 ARG PROJECT
 
-# Étape 1 : compilation avec le SDK
+#compilation avec le SDK
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG PROJECT
 WORKDIR /src
@@ -9,7 +8,7 @@ WORKDIR /src
 COPY src/ src/
 RUN dotnet publish "src/${PROJECT}/${PROJECT}.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# Étape 2 : exécution avec le runtime ASP.NET seul (image plus légère)
+#exécution avec le runtime ASP.NET seul
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
 ARG PROJECT
 WORKDIR /app
