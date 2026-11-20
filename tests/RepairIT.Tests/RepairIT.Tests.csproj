@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.*" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Moq" Version="4.21.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\RepairIT.Shared\RepairIT.Shared.csproj" />
+    <ProjectReference Include="..\..\src\RepairIT.UserService\RepairIT.UserService.csproj" />
+    <ProjectReference Include="..\..\src\RepairIT.CatalogService\RepairIT.CatalogService.csproj" />
+    <ProjectReference Include="..\..\src\RepairIT.CustomerService\RepairIT.CustomerService.csproj" />
+    <ProjectReference Include="..\..\src\RepairIT.RepairService\RepairIT.RepairService.csproj" />
+    <ProjectReference Include="..\..\src\RepairIT.SalesService\RepairIT.SalesService.csproj" />
+  </ItemGroup>
+
+</Project>
