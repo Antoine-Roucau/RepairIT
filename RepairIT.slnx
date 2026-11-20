@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/RepairIT.AuthentificationService/RepairIT.AuthentificationService.csproj" />
+    <Project Path="src/RepairIT.CatalogService/RepairIT.CatalogService.csproj" />
+    <Project Path="src/RepairIT.Client/RepairIT.Client.csproj" />
+    <Project Path="src/RepairIT.CustomerService/RepairIT.CustomerService.csproj" />
+    <Project Path="src/RepairIT.Gateway/RepairIT.Gateway.csproj" />
+    <Project Path="src/RepairIT.RepairService/RepairIT.RepairService.csproj" />
+    <Project Path="src/RepairIT.SalesService/RepairIT.SalesService.csproj" />
+    <Project Path="src/RepairIT.Shared/RepairIT.Shared.csproj" />
+    <Project Path="src/RepairIT.UserService/RepairIT.UserService.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/RepairIT.Tests/RepairIT.Tests.csproj" />
+  </Folder>
+</Solution>
